@@ -11,7 +11,7 @@ app.use('/student-info/v1', students)
 
 const httpsOptions = {
     key: fs.readFileSync('./ssl/key.key'),
-    cert: fs.readFileSync('./ssl/cert.pem')
+    cert: fs.readFileSync('./ssl/cert.crt')
 }
 const server = https.createServer(httpsOptions, app)
 
