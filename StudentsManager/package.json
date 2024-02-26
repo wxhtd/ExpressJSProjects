@@ -1,0 +1,34 @@
+{
+  "name": "studentsmanager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wxhtd/ExpressJSProjects.git"
+  },
+  "keywords": [
+    "https",
+    "get",
+    "post",
+    "expressJs",
+    "nodeJs",
+    "web"
+  ],
+  "author": "Cindy W.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wxhtd/ExpressJSProjects/issues"
+  },
+  "homepage": "https://github.com/wxhtd/ExpressJSProjects#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
