@@ -1,11 +1,22 @@
 ## Updates 2024/03/03
-Added new routes for several GET & POST requests:
+Added new routes for several GET & POST requests, and show user's IP address and device type:
 1. GET to retrieve all the student-info
+
+![2 GET - all student info](https://github.com/wxhtd/ExpressJSProjects/assets/152568460/54b27d0d-bae3-421b-9dc7-5e12fca2267f)
+![2 GET - all student info_folded view](https://github.com/wxhtd/ExpressJSProjects/assets/152568460/aca279fe-247b-4d27-b0a0-7bfa6647d6c7)
+
 2. POST to retrieve student information based on 'student-id'
+
+![3 POST - student info by id](https://github.com/wxhtd/ExpressJSProjects/assets/152568460/029ac60b-58e4-4463-b786-16d1baeed8d2)
+
 3. POST to retrieve student's info by course id. For example, all students who takes CS548
 The result will return students' student-id
+
+![4 POST - students by course](https://github.com/wxhtd/ExpressJSProjects/assets/152568460/238c3ebb-09b8-4b04-bc36-93f42924e8a3)
+
 4. POST to retrieve students who has taken the same courses as the given student
 
+![5 POST - classmates by id](https://github.com/wxhtd/ExpressJSProjects/assets/152568460/7542778a-a94b-46b1-afda-dade21de38d7)
 
 ## Overview
 This is a demo project on ExpressJs.
