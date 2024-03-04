@@ -1,3 +1,12 @@
+## Updates 2024/03/03
+Added new routes for several GET & POST requests:
+1. GET to retrieve all the student-info
+2. POST to retrieve student information based on 'student-id'
+3. POST to retrieve student's info by course id. For example, all students who takes CS548
+The result will return students' student-id
+4. POST to retrieve students who has taken the same courses as the given student
+
+
 ## Overview
 This is a demo project on ExpressJs.
 
@@ -189,3 +198,4 @@ git reset – StudentsManager/.gitignore
 ** Verify file list by git status
 git commit -m "first check-in"
 ```
+
