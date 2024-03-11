@@ -1,20 +1,20 @@
-const express = require('express')
-const https = require('https')
-const fs = require('fs')
-const startup = require('./routes/startup')
-const students = require('./routes/students')
+import express from 'express'
+import https from 'https'
+import {readFileSync} from 'fs'
+import {startup} from './routes/startup.js'
+import {students} from './routes/students.js'
 
 const app = express()
 app.use(express.json())
 app.use('/', startup)
-app.use('/student-info/v1', students)
+app.use('/students/', students)
 
 const httpsOptions = {
-    key: fs.readFileSync('./ssl/key.key'),
-    cert: fs.readFileSync('./ssl/cert.crt')
+    key: readFileSync('./ssl/key.key'),
+    cert: readFileSync('./ssl/cert.crt')
 }
 const server = https.createServer(httpsOptions, app)
 
-server.listen(8080, () => {
+server.listen(8000, () => {
     console.log('app is running')
 })
