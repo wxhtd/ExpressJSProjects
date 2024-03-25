@@ -1,3 +1,5 @@
+# Introduction
+
 This project is a sample React App that pulls data from web services and presents it to users.
 The form takes user input and uses it to filter the configuration data retrieved from the "filter-config" service provided by SampleHttpsService project.
 
