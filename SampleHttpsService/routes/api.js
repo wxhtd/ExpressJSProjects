@@ -2,22 +2,27 @@ import express from 'express'
 import axios from 'axios'
 import 'dotenv/config'
 import { GITHUB_API_URL, GITHUB_ACCESS_TOKEN } from '../settings.js'
+import {getLoggerInstance} from '../logger.js'
+
+const logger = getLoggerInstance()
 
 export const api = express.Router()
 api.use(express.json())
 
 const getConfig = async () => {
     try {
+        logger.info('Start getting config')
         const response = await axios.get(GITHUB_API_URL, {
             headers: {
                 'Accept': 'application/vnd.github.v3.raw',
                 'Authorization': GITHUB_ACCESS_TOKEN
             },
         })
-        const jsonData = response.data
+        logger.info('Got config data')
+        const jsonData = response.data        
         return jsonData
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         res.status(500).send('Error fetching the JSON file')
     }
 }
@@ -49,6 +54,7 @@ const getValuesByKeys = (config, keys) => {
 
 //Get json config file from GitHub
 api.get('/fetch-config', async (req, res) => {
+    logger.info('receive request to fetch config')
     const data = await getConfig()
     res.json(data)
 })
@@ -60,18 +66,20 @@ api.get('/fetch-config', async (req, res) => {
 //}
 api.post('/filter-config', async (req, res) => {
     try {
+        logger.info('receive request to filter config')
         const { filter } = req.body
-        console.log('filters = ', filter)
+        logger.log('filters = ', filter)
         if (filter === undefined) {
-            console.log('Cannot find filter in request')
+            logger.warn('Cannot find filter in request')
             res.json('Cannot find filter in request')
             return
         }
         const data = await getConfig()
         const filteredData = getValuesByKeys(data, filter)
+        logger.info('filtered config ', filteredData)
         res.json(filteredData)
     } catch (error) {
-        console.error(error)
+        logger.error(error)
         res.status(500).send('Error processing the request')
     }
 })

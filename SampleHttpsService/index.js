@@ -5,7 +5,9 @@ import cors from 'cors'
 import {readFileSync} from 'fs'
 import {startup} from './routes/startup.js'
 import {api} from './routes/api.js'
+import {getLoggerInstance} from './logger.js'
 
+const logger = getLoggerInstance()
 const app = express()
 app.use(cors())
 app.use(express.json())
@@ -19,5 +21,5 @@ const httpsOptions = {
 const server = https.createServer(httpsOptions, app)
 
 server.listen(8000, () => {
-    console.log('app is running')
+    logger.info('app is running')
 })
