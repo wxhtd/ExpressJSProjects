@@ -1,0 +1,116 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  /* ... other styles ... */
+}
+
+.user-info {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adjust gap between name and button */
+}
+
+.user-info span {
+  font-weight: bold;
+}
+
+.user-info button {
+  padding: 5px 10px;
+  cursor: pointer;
+  /* Style as needed */
+}
+
+.calendar-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.calendar {
+  /* Adjust width as needed, may vary based on your specific layout */
+  width: calc(100% - 400px);
+  margin-right: 20px; /* Give some space between calendar and form */
+}
+
+.event-form {
+  /* Adjust width as needed, may vary based on your specific layout */
+  width: 380px;
+  min-height: 600px; /* Or however tall you want it to be */
+  background: #f8f8f8;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  overflow-y: auto; /* In case the form is longer than the screen */
+}
+
+.event-slot {
+  background: #f0f0f0;
+  margin-top: 2px;
+  padding: 5px;
+  text-align: center;
+  font-size: 0.85em;
+  border-radius: 4px;
+}
+
+.event-slot.empty {
+  opacity: 0.3;
+}
+
+.event-slots {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.number {
+  font-size: 1.2em;
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+
+.calendar {
+    margin: 50px auto;
+    padding: 20px;
+    width: 95%;
+    max-width: 1100px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  }
+  
+  .header {
+    margin-bottom: 10px;
+  }
+  
+  .row {
+    display: flex;
+    margin-bottom: 5px;
+  }
+  
+  .col {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .cell {
+    padding: 10px;
+    border: 1px solid #ddd;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .cell.disabled {
+    color: #ddd;
+  }
+  
+  .cell.selected {
+    border: 2px solid #0f0;
+  }
+  

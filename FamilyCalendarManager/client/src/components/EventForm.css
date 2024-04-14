@@ -1,0 +1,59 @@
+/* src/components/EventForm.css */
+.event-form {
+    background: #fff; /* White background */
+    color: #333; /* Darker text for readability */
+    padding: 20px;
+    border-radius: 5px;
+    width: 380px; /* Adjust width as needed */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  }
+  
+  .event-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .event-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600; /* Make labels bold */
+  }
+  
+  .event-form .form-group input[type="text"],
+  .event-form .form-group input[type="datetime-local"],
+  .event-form .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc; /* Subtle border */
+    border-radius: 4px;
+    font-size: 16px; /* Increase font size for readability */
+  }
+  
+  .event-form .form-group input[type="datetime-local"] {
+    /* Ensure the text is visible and matches the theme */
+    background: #fff;
+    color: #333;
+  }
+  
+  .event-form .form-actions {
+    text-align: right;
+    padding-top: 10px;
+  }
+  
+  .event-form .form-actions button {
+    background: #eee; /* Light grey background */
+    border: 1px solid #ccc; /* Matching border */
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 16px; /* Matching font size for buttons */
+    border-radius: 4px;
+  }
+  
+  .event-form .form-actions button:hover {
+    background: #ddd; /* Slightly darker on hover */
+  }
+  
+  .event-form .form-actions button:active {
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2); /* Simulate button press */
+  }
+  
