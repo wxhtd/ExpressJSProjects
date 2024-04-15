@@ -24,40 +24,6 @@ const EventForm = ({ event, date, onSave, onDelete, onClose }) => {
     onSave(eventData);
   };
 
-  // useEffect(() => {
-  //   // If an event is passed in, pre-populate the form with its data
-  //   if (event) {
-  //     setEventData({
-  //       ...eventData,
-  //       title: event.title,
-  //       startTime: event.startTime,
-  //       endTime: event.endTime,
-  //       people: event.people,
-  //       description: event.description,
-  //       location: event.location,
-  //     });
-  //   } else {
-  //     // Reset form for a new event
-  //     setEventData({
-  //       title: '',
-  //       startTime: format(date, 'yyyy-MM-dd'),
-  //       endTime: format(date, 'yyyy-MM-dd'),
-  //       people: '',
-  //       description: '',
-  //       location: '',
-  //     });
-  //   }
-  // }, [event, date]);
-
-  // Handle input changes
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setEventData({ ...eventData, [name]: value });
-  // };
-
-  // Render form fields, buttons, and handle submission here
-  // ...
-
   return (
     <div className="event-form">
       <div className="form-group">

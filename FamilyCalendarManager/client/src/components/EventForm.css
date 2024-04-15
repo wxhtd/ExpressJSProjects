@@ -10,6 +10,7 @@
   
   .event-form .form-group {
     margin-bottom: 15px;
+    text-align: left;
   }
   
   .event-form .form-group label {
@@ -40,7 +41,7 @@
   }
   
   .event-form .form-actions button {
-    background: #eee; /* Light grey background */
+    background: #007bff; /* Light grey background */
     border: 1px solid #ccc; /* Matching border */
     padding: 10px 20px;
     margin-left: 10px;

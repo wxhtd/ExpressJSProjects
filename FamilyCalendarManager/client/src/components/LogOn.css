@@ -1,0 +1,65 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1%; /* Adjust the margin as needed to move the form up */
+  width: 100%;
+}
+
+.form {
+  background: #FFF;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 80%; /* Increase the width */
+  max-width: 500px; /* Set a max-width for larger screens */
+}
+
+.form h2 {
+  margin-bottom: 20px;
+}
+
+.form input {
+  width: calc(100% - 20px); /* Full width minus padding */
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form button {
+  width: calc(100% - 20px); /* Full width minus padding */
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.form button:hover {
+  background-color: #0056b3;
+}
+
+.form-link {
+  display: block;
+  color: #007bff;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.form-separator {
+  width: 80%; /* Match the width of the forms */
+  max-width: 500px; /* Match the max-width of the forms */
+  border-top: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+}

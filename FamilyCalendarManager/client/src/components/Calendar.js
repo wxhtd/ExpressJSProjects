@@ -6,8 +6,9 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import { format, startOfWeek, addDays, startOfMonth, endOfMonth, endOfWeek, isSameMonth, isSameDay, addMonths } from 'date-fns';
 import axios from 'axios';
 
-const Calendar = () => {
-  const [userName, setUserName] = useState('John Doe');
+const Calendar = ({name,userId}) => {
+  console.log(`name=${name}`);
+  console.log(`userId=${userId}`);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -15,15 +16,13 @@ const Calendar = () => {
   const [events, setEvents] = useState({});
   const defaultEmptySlots = 4; // Default number of empty slots if no events
 
-  const eventServiceBaseUrl = "http://localhost:8000/api/events";
-  const userServiceBaseUrl = "http://localhost:8000/api/users";
-
+  const eventServiceUrl = "http://localhost:8000/api/events";
   // load events data
   useEffect(() => {
     const loadData = async () => {
       console.log('Start updating event');
       try {
-        const response = await axios.get(`${eventServiceBaseUrl}/661bbd7a9476172cd083029c`);
+        const response = await axios.get(`${eventServiceUrl}/${userId}`);
         const result = response.data;
         console.log(`result=${JSON.stringify(result)}`);
 
@@ -33,7 +32,7 @@ const Calendar = () => {
             acc[dateKey] = [];
           }
           acc[dateKey].push({
-            id: event._id, // Changed to id from _id for consistency with your state
+            _id: event._id, // Changed to id from _id for consistency with your state
             title: event.title,
             startTime: event.startTime,
             endTime: event.endTime,
@@ -56,7 +55,7 @@ const Calendar = () => {
   const handleSignOut = () => {
     // Sign out logic here
     console.log('User signed out');
-    // Redirect to home page, or update state to show signed out status
+    document.getElementById('myForm').reset();
   };
 
   // get events for a specific day
@@ -89,7 +88,7 @@ const Calendar = () => {
     }
 
     return slots.map((event, index) => (
-      <div className="event-slot" key={event.id || index} onClick={() => onSlotClick(event, day)}>
+      <div className="event-slot" key={event._id || index} onClick={() => onSlotClick(event, day)}>
         {event.title || ' '}
       </div>
     ));
@@ -97,35 +96,36 @@ const Calendar = () => {
 
   // when a slot is clicked, if event is empty, create new event; otherwise, update/delete existing event
   const onSlotClick = (event, day) => {
+    console.log('on slot click');
     setSelectedDate(format(day, 'yyyy-MM-dd') + "T12:00");
-    setSelectedEvent(event.id ? event : null); // If the event has an ID, it's an existing event
+    setSelectedEvent(event._id ? event : null); // If the event has an ID, it's an existing event
     setIsEventFormOpen(true); // Open the event form
   };
 
 
   const handleEventSave = async (eventData) => {
     console.log('handleEventSave');
-    eventData.user = "661bbd7a9476172cd083029c";
-    if (eventData.id) {
+    eventData.user = userId;
+    if (eventData._id) {
       // Update existing event
       const updatedEvents =
       {
         ...events,
         [format(eventData.startTime, 'yyyy-MM-dd')]: events[format(eventData.startTime, 'yyyy-MM-dd')].map(event =>
-          event.id === eventData.id ? eventData : event
+          event._id === eventData._id ? eventData : event
         ),
       };
       setEvents(updatedEvents);
 
       console.log('Start updating event');
-      await axios.post(eventServiceBaseUrl, eventData)
+      await axios.post(eventServiceUrl, eventData)
         .then(response => console.log(response.data))
         .catch(error => console.log(error));
 
     } else {
       // Add new event
       // const newId = Date.now(); // Temporary ID assignment, replace with server-generated ID
-      const newEvent = { ...eventData, id: null};
+      const newEvent = { ...eventData, id: null };
       const dateKey = format(eventData.startTime, 'yyyy-MM-dd');
       const updatedEvents = {
         ...events,
@@ -133,23 +133,28 @@ const Calendar = () => {
       };
       setEvents(updatedEvents);
       console.log('Start inserting event');
-      await axios.post(eventServiceBaseUrl, eventData)
-        .then(response => {console.log(response.data); newEvent._id = response.data._id;})
+      await axios.post(eventServiceUrl, eventData)
+        .then(response => { console.log(response.data); newEvent._id = response.data._id; })
         .catch(error => console.log(error));
     }
     setIsEventFormOpen(false); // Close the event form
   };
 
-  const handleEventDelete = async (eventId, date) => {
+  const handleEventDelete = async (event, date) => {
     // Filter out the event to delete
     console.log('handle delete');
     const dateKey = format(date, 'yyyy-MM-dd');
     const updatedEvents = {
       ...events,
-      [dateKey]: events[dateKey].filter(event => event.id !== eventId),
+      [dateKey]: events[dateKey].filter(event => event._id !== event._id),
     };
     setEvents(updatedEvents);
-    // TODO: make DELETE request to the server to delete the event
+
+    console.log('Start deleting event');
+    await axios.delete(`${eventServiceUrl}/${event._id}`)
+      .then(response => console.log(response.data))
+      .catch(error => console.log(error));
+
     setIsEventFormOpen(false); // Close the event form
   };
 
@@ -240,7 +245,7 @@ const Calendar = () => {
       <div className="calendar-header">
         {/* ... other header elements ... */}
         <div className="user-info">
-          <span>{userName}</span>
+          <span>{name}</span>
           <button onClick={handleSignOut}>Sign Out</button>
         </div>
       </div>
@@ -256,7 +261,7 @@ const Calendar = () => {
             event={selectedEvent}
             onClose={() => setIsEventFormOpen(false)}
             onSave={handleEventSave}
-            onDelete={handleEventDelete}
+            onDelete={() => handleEventDelete(selectedEvent, selectedDate)}
           />
         )}
       </div>

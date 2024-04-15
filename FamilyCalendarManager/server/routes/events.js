@@ -1,11 +1,13 @@
 import express from 'express';
 import { getDB } from '../database.js';
+import { ObjectId } from 'mongodb';
 
 export const events = express.Router();
 
 // Get all events for a user
 events.get('/:userId', async (req, res) => {
   try {
+    console.log(req.params.userId);
     const events = await getDB().collection('events').find({ user: req.params.userId }).toArray();
     res.json(events);
   } catch (err) {
@@ -17,17 +19,19 @@ events.get('/:userId', async (req, res) => {
 events.post('/', async (req, res) => {
   let result;
   const event = req.body;
+  const {_id, ...updateData} = event;
   console.log('get post request');
   try {
     console.log(`event = ${JSON.stringify(event)}}`);
     console.log(event._id);
     if (event._id !== undefined && event._id !== null) {
       console.log('update');
-      result = await getDB().collection('events').updateOne({ _id: event._id }, req.body);
+      console.log(`filter=${JSON.stringify({ _id: new ObjectId(event._id) })}`);
+      result = await getDB().collection('events').updateOne({ _id: new ObjectId(event._id) }, { $set: updateData });
     }
     else {
       console.log('insert');
-      result = await getDB().collection('events').insertOne(event);
+      result = await getDB().collection('events').insertOne(updateData);
     }
     if (result !== undefined && result.acknowledged) {
       event._id = result.insertedId || result.upsertedId;
@@ -46,8 +50,11 @@ events.post('/', async (req, res) => {
 // Delete an event
 events.delete('/:id', async (req, res) => {
   try {
-    const result = await getDB().collection('events').deleteOne({ _id: req.params.id });
+    console.log(`delete params = ${req.params}`);
+    console.log(`id = ${req.params.id}`);
+    const result = await getDB().collection('events').deleteOne({ _id: new ObjectId(req.params.id) });
     if (result !== undefined && result.acknowledged) {
+      console.log(JSON.stringify(result));
       res.json({ message: 'Deleted event' });
     }
     else {
