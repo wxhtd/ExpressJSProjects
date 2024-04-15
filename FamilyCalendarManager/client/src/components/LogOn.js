@@ -19,7 +19,7 @@ const LogOn = () => {
   const [email, setEmail] = useState('');
   const [people, setPeople] = useState('');
 
-  const userServiceUrl = "http://localhost:8000/api/users";
+  const userServiceUrl = "https://localhost:8000/api/users";
   // Event handlers for form submissions
   const handleSignIn = async (event) => {
     event.preventDefault();
