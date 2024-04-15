@@ -16,7 +16,7 @@ const Calendar = ({name,userId}) => {
   const [events, setEvents] = useState({});
   const defaultEmptySlots = 4; // Default number of empty slots if no events
 
-  const eventServiceUrl = "http://localhost:8000/api/events";
+  const eventServiceUrl = "https://localhost:8000/api/events";
   // load events data
   useEffect(() => {
     const loadData = async () => {
@@ -53,7 +53,6 @@ const Calendar = ({name,userId}) => {
   }, []);
 
   const handleSignOut = () => {
-    // Sign out logic here
     console.log('User signed out');
     window.location.reload();
   };
@@ -124,7 +123,6 @@ const Calendar = ({name,userId}) => {
 
     } else {
       // Add new event
-      // const newId = Date.now(); // Temporary ID assignment, replace with server-generated ID
       const newEvent = { ...eventData, id: null };
       const dateKey = format(eventData.startTime, 'yyyy-MM-dd');
       const updatedEvents = {
@@ -243,7 +241,6 @@ const Calendar = ({name,userId}) => {
   return (
     <div className="app-container">
       <div className="calendar-header">
-        {/* ... other header elements ... */}
         <div className="user-info">
           <span>{name}</span>
           <button onClick={handleSignOut}>Sign Out</button>

@@ -6,7 +6,6 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleAuth = (isUserAuthenticated) => {
-    // You would replace this with actual authentication logic
     setIsAuthenticated(isUserAuthenticated);
   };
 

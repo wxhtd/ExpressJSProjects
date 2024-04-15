@@ -3,7 +3,7 @@ import './ProfileForm.css';
 import axios from 'axios';
 import Calendar from './Calendar';
 
-const userServiceUrl = "http://localhost:8000/api/users";
+const userServiceUrl = "https://localhost:8000/api/users";
 
 const ProfileForm = ({ userId, propName, propEmail, propPeople }) => {
     console.log(`userId=${userId}`);
@@ -24,7 +24,6 @@ const ProfileForm = ({ userId, propName, propEmail, propPeople }) => {
         setShowAddPerson(false);
     };
 
-    // Replace the following functions with actual logic
     const handleUpdateProfile = async () => {
         setUpdateResult('');
         try {
@@ -54,10 +53,6 @@ const ProfileForm = ({ userId, propName, propEmail, propPeople }) => {
 
     const handleDeleteAccount = () => {
         // Delete account logic
-    };
-
-    const handleNavigateToCalendar = () => {
-        // Navigate to calendar logic
     };
 
     const validateEmail = (email) => {
