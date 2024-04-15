@@ -55,7 +55,7 @@ const Calendar = ({name,userId}) => {
   const handleSignOut = () => {
     // Sign out logic here
     console.log('User signed out');
-    document.getElementById('myForm').reset();
+    window.location.reload();
   };
 
   // get events for a specific day
